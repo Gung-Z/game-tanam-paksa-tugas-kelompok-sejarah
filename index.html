@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Sejarah: Cultuurstelsel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #222;
+        }
+        
+        .instruction {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        
+        .timer-container {
+            font-weight: bold;
+            font-size: 1.2em;
+            background: #f0f0f0;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .word-bank {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            min-height: 50px;
+        }
+        
+        .word {
+            background-color: #ced4da;
+            color: #495057;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            user-select: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .word.selected {
+            background-color: #4CAF50;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .word.hidden {
+            display: none;
+        }
+        
+        .text-content {
+            font-size: 1.05em;
+            text-align: justify;
+        }
+        
+        .dropzone {
+            display: inline-block;
+            min-width: 120px;
+            height: 30px;
+            background-color: #e8f5e9;
+            border: 2px solid #81c784;
+            border-radius: 6px;
+            margin: 0 5px;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            color: #2e7d32;
+            font-weight: bold;
+            line-height: 30px;
+            padding: 0 10px;
+        }
+        
+        .dropzone.active {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+        
+        .dropzone.correct {
+            background-color: #c8e6c9;
+            border-color: #388e3c;
+            color: #1b5e20;
+        }
+        
+        .dropzone.wrong {
+            background-color: #ffcdd2;
+            border-color: #d32f2f;
+            color: #b71c1c;
+        }
+        
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        #btn-check {
+            background-color: #424242;
+            color: white;
+        }
+        
+        #btn-reset {
+            background-color: white;
+            color: #424242;
+            border: 1px solid #ccc;
+        }
+        
+        #score-display {
+            font-weight: bold;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 600px) {
+            .text-content {
+                font-size: 0.95em;
+            }
+            .dropzone {
+                min-width: 90px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Game Lengkapi Paragraf: Sejarah Cultuurstelsel</h2>
+        <p class="instruction">
+            <strong>Cara main:</strong> Klik/ketuk kata dari kotak di bawah, lalu klik/ketuk kotak kosong yang sesuai dalam paragraf. Waktu pengerjaan 7 menit. Jika waktu habis, jawaban akan diperiksa otomatis. Hati-hati, ada kata pengecoh!
+        </p>
+
+        <div class="timer-container" id="timer">07:00</div>
+
+        <div class="word-bank" id="word-bank">
+            <!-- Kata-kata akan di-generate oleh JavaScript -->
+        </div>
+
+        <div class="text-content">
+            Sistem <span class="dropzone" data-answer="Tanam Paksa"></span> atau yang dikenal oleh pemerintah kolonial Belanda sebagai <i>Cultuurstelsel</i>, diperkenalkan secara resmi pada tahun 1830 oleh Gubernur Jenderal <span class="dropzone" data-answer="Johannes van den Bosch"></span>.
+            Kebijakan ini diterapkan secara agresif untuk menyelamatkan perekonomian Belanda yang sedang berada di ambang kebangkrutan akibat besarnya kas yang terkuras untuk biaya <span class="dropzone" data-answer="Perang"></span> di Nusantara, khususnya
+            Perang Diponegoro. Berdasarkan aturan tertulisnya, penduduk desa diwajibkan untuk menyisihkan <span class="dropzone" data-answer="Seperlima"></span> bagian dari luas tanah mereka untuk ditanami tanaman <span class="dropzone" data-answer="Komoditas Ekspor"></span>            yang sangat laku di pasar dunia Eropa. Tanaman wajib tersebut di antaranya adalah kopi, tebu, teh, dan <span class="dropzone" data-answer="Nila"></span>.<br><br> Namun, dalam praktiknya, aturan tersebut banyak diselewengkan. Para bupati sering
+            memeras rakyat demi mengejar <span class="dropzone" data-answer="Cultuurprocenten"></span>, yakni sistem pemberian bonus dari pemerintah Belanda jika hasil panen melampaui target. Akibat sistem ini, banyak petani tidak memiliki lahan tersisa
+            untuk menanam <span class="dropzone" data-answer="Padi"></span> sebagai kebutuhan pangan utama. Kondisi ekstrem ini memicu bencana <span class="dropzone" data-answer="Kelaparan"></span> yang parah di berbagai daerah. Ironisnya, kerugian akibat
+            <span class="dropzone" data-answer="Gagal"></span> panen tanaman ekspor tetap dibebankan sepenuhnya kepada para petani.<br><br> Penderitaan rakyat akhirnya memicu protes. Salah satu tokoh yang paling vokal mengkritik adalah <span class="dropzone"
+                data-answer="Eduard Douwes Dekker"></span>, yang menulis novel satir berjudul <span class="dropzone" data-answer="Max Havelaar"></span> dengan nama pena Multatuli. Tekanan dari golongan <span class="dropzone" data-answer="Liberal"></span>            di parlemen Belanda akhirnya memaksa pemerintah menghapus sistem ini. Penghapusan <i>Cultuurstelsel</i> mencapai puncaknya dengan dikeluarkannya <span class="dropzone" data-answer="Undang-Undang Agraria"></span> pada tahun 1870.
+        </div>
+
+        <div class="controls">
+            <button id="btn-check">Periksa jawaban</button>
+            <button id="btn-reset">Ulangi</button>
+            <span id="score-display"></span>
+        </div>
+    </div>
+
+    <script>
+        const wordsList = [
+            "Johannes van den Bosch", "Seperlima", "Padi", "Gagal",
+            "Eduard Douwes Dekker", "Liberal", "Undang-Undang Agraria",
+            "Tanam Paksa", "Perang", "Komoditas Ekspor", "Nila",
+            "Cultuurprocenten", "Kelaparan", "Max Havelaar",
+            "H.W. Daendels", "Seperempat", "Politik Etis"
+        ];
+
+        const wordBank = document.getElementById('word-bank');
+        const dropzones = document.querySelectorAll('.dropzone');
+        const btnCheck = document.getElementById('btn-check');
+        const btnReset = document.getElementById('btn-reset');
+        const scoreDisplay = document.getElementById('score-display');
+        const timerDisplay = document.getElementById('timer');
+
+        let selectedWordElement = null;
+        const totalTime = 7 * 60; // 7 menit dalam detik
+        let timeRemaining = totalTime;
+        let timerInterval;
+        let isGameOver = false;
+
+        function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+        }
+
+        function initGame() {
+            isGameOver = false;
+            selectedWordElement = null;
+            timeRemaining = totalTime;
+            scoreDisplay.innerHTML = "";
+            btnCheck.disabled = false;
+
+            wordBank.innerHTML = '';
+            shuffle(wordsList);
+            wordsList.forEach(word => {
+                const span = document.createElement('span');
+                span.classList.add('word');
+                span.textContent = word;
+                span.dataset.word = word;
+                span.addEventListener('click', () => selectWord(span));
+                wordBank.appendChild(span);
+            });
+
+            dropzones.forEach(zone => {
+                zone.textContent = "";
+                zone.classList.remove('correct', 'wrong');
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    checkAnswers();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent =
+                (minutes < 10 ? "0" : "") + minutes + ":" +
+                (seconds < 10 ? "0" : "") + seconds;
+        }
+
+        function selectWord(element) {
+            if (isGameOver) return;
+
+            document.querySelectorAll('.word').forEach(el => el.classList.remove('selected'));
+
+            if (selectedWordElement === element) {
+                selectedWordElement = null;
+            } else {
+                selectedWordElement = element;
+                element.classList.add('selected');
+            }
+        }
+
+        dropzones.forEach(zone => {
+            zone.addEventListener('click', () => {
+                if (isGameOver) return;
+
+                const currentText = zone.textContent;
+
+                if (selectedWordElement) {
+                    if (currentText) {
+                        returnWordToBank(currentText);
+                    }
+
+                    const wordToPlace = selectedWordElement.dataset.word;
+                    zone.textContent = wordToPlace;
+                    selectedWordElement.classList.add('hidden');
+                    selectedWordElement.classList.remove('selected');
+                    selectedWordElement = null;
+
+                } else if (currentText) {
+                    returnWordToBank(currentText);
+                    zone.textContent = "";
+                }
+            });
+        });
+
+        function returnWordToBank(word) {
+            const bankWords = document.querySelectorAll('.word');
+            bankWords.forEach(el => {
+                if (el.dataset.word === word) {
+                    el.classList.remove('hidden');
+                }
+            });
+        }
+
+        function checkAnswers() {
+            if (isGameOver) return;
+            isGameOver = true;
+            clearInterval(timerInterval);
+            btnCheck.disabled = true;
+
+            let correctCount = 0;
+            const total = dropzones.length;
+
+            // Hitung waktu yang dihabiskan
+            const timeTaken = totalTime - timeRemaining;
+            const minutesTaken = Math.floor(timeTaken / 60);
+            const secondsTaken = timeTaken % 60;
+
+            document.querySelectorAll('.word').forEach(el => el.classList.remove('selected'));
+            selectedWordElement = null;
+
+            dropzones.forEach(zone => {
+                const answer = zone.textContent.trim();
+                const correctAnswer = zone.dataset.answer;
+
+                if (answer === correctAnswer) {
+                    zone.classList.add('correct');
+                    correctCount++;
+                } else {
+                    zone.classList.add('wrong');
+                }
+            });
+
+            // Tampilkan Skor dan Waktu
+            let scoreColor = correctCount === total ? "#2e7d32" : "#d32f2f";
+
+            scoreDisplay.innerHTML = `<span style="color:${scoreColor}">Skor: ${correctCount} dari ${total} benar.</span><br>
+                                  <span style="color:#424242; font-weight:normal;">Waktu pengerjaan: ${minutesTaken} menit ${secondsTaken} detik.</span>`;
+        }
+
+        btnCheck.addEventListener('click', checkAnswers);
+        btnReset.addEventListener('click', initGame);
+
+        initGame();
+    </script>
+
+</body>
+
+</html>
