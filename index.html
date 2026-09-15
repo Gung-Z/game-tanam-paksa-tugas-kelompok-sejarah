@@ -17,7 +17,7 @@
             align-items: center;
             min-height: 90vh;
         }
-        
+
         #login-screen {
             background-color: #fff;
             padding: 40px;
@@ -27,12 +27,12 @@
             max-width: 400px;
             width: 100%;
         }
-        
+
         #login-screen h2 {
             margin-top: 0;
             color: #2e7d32;
         }
-        
+
         #login-screen input {
             width: 90%;
             padding: 12px;
@@ -42,12 +42,12 @@
             font-size: 1.1em;
             text-align: center;
         }
-        
+
         #login-screen input:focus {
             border-color: #4CAF50;
             outline: none;
         }
-        
+
         #btn-start-game {
             background-color: #4CAF50;
             color: white;
@@ -60,11 +60,11 @@
             width: 100%;
             transition: 0.3s;
         }
-        
+
         #btn-start-game:hover {
             background-color: #388e3c;
         }
-        
+
         #game-screen {
             display: none;
             max-width: 700px;
@@ -75,139 +75,44 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin: 0 auto;
         }
-        
-        h2 {
-            margin-top: 0;
-            color: #222;
-        }
-        
-        .instruction {
-            color: #666;
-            font-size: 0.95em;
-            margin-bottom: 20px;
-        }
-        
+
+        h2 { margin-top: 0; color: #222; }
+        .instruction { color: #666; font-size: 0.95em; margin-bottom: 20px; }
         .timer-container {
-            font-weight: bold;
-            font-size: 1.2em;
-            background: #f0f0f0;
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            color: #333;
+            font-weight: bold; font-size: 1.2em; background: #f0f0f0;
+            display: inline-block; padding: 5px 15px; border-radius: 20px;
+            margin-bottom: 20px; color: #333;
         }
-        
         .word-bank {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
-            min-height: 50px;
+            background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px;
+            border-radius: 10px; display: flex; flex-wrap: wrap; gap: 10px;
+            margin-bottom: 30px; min-height: 50px;
         }
-        
         .word {
-            background-color: #ced4da;
-            color: #495057;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            user-select: none;
-            font-weight: 500;
-            transition: all 0.2s;
+            background-color: #ced4da; color: #495057; padding: 8px 15px;
+            border-radius: 20px; cursor: pointer; user-select: none;
+            font-weight: 500; transition: all 0.2s;
         }
-        
-        .word.selected {
-            background-color: #4CAF50;
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .word.hidden {
-            display: none;
-        }
-        
-        .text-content {
-            font-size: 1.05em;
-            text-align: justify;
-        }
-        
+        .word.selected { background-color: #4CAF50; color: white; transform: scale(1.05); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+        .word.hidden { display: none; }
+        .text-content { font-size: 1.05em; text-align: justify; }
         .dropzone {
-            display: inline-block;
-            min-width: 120px;
-            height: 30px;
-            background-color: #e8f5e9;
-            border: 2px solid #81c784;
-            border-radius: 6px;
-            margin: 0 5px;
-            vertical-align: middle;
-            text-align: center;
-            cursor: pointer;
-            color: #2e7d32;
-            font-weight: bold;
-            line-height: 30px;
-            padding: 0 10px;
+            display: inline-block; min-width: 120px; height: 30px; background-color: #e8f5e9;
+            border: 2px solid #81c784; border-radius: 6px; margin: 0 5px;
+            vertical-align: middle; text-align: center; cursor: pointer; color: #2e7d32;
+            font-weight: bold; line-height: 30px; padding: 0 10px;
         }
-        
-        .dropzone.correct {
-            background-color: #c8e6c9;
-            border-color: #388e3c;
-            color: #1b5e20;
-        }
-        
-        .dropzone.wrong {
-            background-color: #ffcdd2;
-            border-color: #d32f2f;
-            color: #b71c1c;
-        }
-        
-        .controls {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        #btn-check {
-            background-color: #424242;
-            color: white;
-        }
-        
-        #btn-reset {
-            background-color: white;
-            color: #424242;
-            border: 1px solid #ccc;
-            display: none;
-        }
-        
-        #score-display {
-            font-weight: bold;
-            line-height: 1.4;
-        }
-        
+        .dropzone.correct { background-color: #c8e6c9; border-color: #388e3c; color: #1b5e20; }
+        .dropzone.wrong { background-color: #ffcdd2; border-color: #d32f2f; color: #b71c1c; }
+        .controls { margin-top: 30px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
+        button { padding: 10px 20px; border: none; border-radius: 6px; font-size: 1em; cursor: pointer; font-weight: bold; }
+        #btn-check { background-color: #424242; color: white; }
+        #btn-reset { background-color: white; color: #424242; border: 1px solid #ccc; display: none; }
+        #score-display { font-weight: bold; line-height: 1.4; }
+
         @media (max-width: 600px) {
-            .text-content {
-                font-size: 0.95em;
-            }
-            .dropzone {
-                min-width: 90px;
-                font-size: 0.9em;
-            }
+            .text-content { font-size: 0.95em; }
+            .dropzone { min-width: 90px; font-size: 0.9em; }
         }
     </style>
 </head>
@@ -252,30 +157,214 @@
 
     <!-- SCRIPT UNTUK FIREBASE (Gunakan tipe module) -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"; import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"; // Konfigurasi Firebase dari
-        akunmu const firebaseConfig = { apiKey: "AIzaSyB9_YkrVStYnx77UU8Jg3zqEj-n0hJJE3A", authDomain: "gametugassejarahkelompok2.firebaseapp.com", projectId: "gametugassejarahkelompok2", storageBucket: "gametugassejarahkelompok2.firebasestorage.app",
-        messagingSenderId: "1044879828390", appId: "1:1044879828390:web:cb934e9dd9d3eca842db67" }; const app = initializeApp(firebaseConfig); const db = getFirestore(app); // LOGIKA GAME const wordsList = [ "Johannes van den Bosch", "Seperlima", "Padi",
-        "Gagal", "Eduard Douwes Dekker", "Liberal", "Undang-Undang Agraria", "Tanam Paksa", "Perang", "Komoditas Ekspor", "Nila", "Cultuurprocenten", "Kelaparan", "Max Havelaar", "H.W. Daendels", "Seperempat", "Politik Etis" ]; const wordBank = document.getElementById('word-bank');
-        const dropzones = document.querySelectorAll('.dropzone'); const btnCheck = document.getElementById('btn-check'); const scoreDisplay = document.getElementById('score-display'); const timerDisplay = document.getElementById('timer'); const loginScreen
-        = document.getElementById('login-screen'); const gameScreen = document.getElementById('game-screen'); const inputName = document.getElementById('player-name'); const btnStartGame = document.getElementById('btn-start-game'); let selectedWordElement
-        = null; const totalTime = 7 * 60; // 7 menit let timeRemaining = totalTime; let timerInterval; let isGameOver = false; let currentPlayerName = ""; btnStartGame.addEventListener('click', () => { const nameValue = inputName.value.trim(); if (nameValue
-        === "") { alert("Harap masukkan nama kamu terlebih dahulu!"); return; } currentPlayerName = nameValue; loginScreen.style.display = 'none'; gameScreen.style.display = 'block'; document.body.style.display = 'block'; initGame(); }); inputName.addEventListener('keypress',
-        function (e) { if (e.key === 'Enter') { btnStartGame.click(); } }); function shuffle(array) { array.sort(() => Math.random() - 0.5); } function initGame() { isGameOver = false; selectedWordElement = null; timeRemaining = totalTime; scoreDisplay.innerHTML
-        = ""; btnCheck.disabled = false; btnCheck.textContent = "Selesai & Kumpulkan"; wordBank.innerHTML = ''; shuffle(wordsList); wordsList.forEach(word => { const span = document.createElement('span'); span.classList.add('word'); span.textContent =
-        word; span.dataset.word = word; span.addEventListener('click', () => selectWord(span)); wordBank.appendChild(span); }); dropzones.forEach(zone => { zone.textContent = ""; zone.classList.remove('correct', 'wrong'); }); startTimer(); } function
-        startTimer() { clearInterval(timerInterval); updateTimerDisplay(); timerInterval = setInterval(() => { timeRemaining--; updateTimerDisplay(); if (timeRemaining
-        <=0 ) { clearInterval(timerInterval); checkAnswers(); } }, 1000); } function
-            updateTimerDisplay() { const minutes=M ath.floor(timeRemaining / 60); const seconds=t imeRemaining % 60; timerDisplay.textContent=( minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds; } function selectWord(element)
-            { if (isGameOver) return; document.querySelectorAll( '.word').forEach(el=> el.classList.remove('selected')); if (selectedWordElement === element) { selectedWordElement = null; } else { selectedWordElement = element; element.classList.add('selected'); } } dropzones.forEach(zone => { zone.addEventListener('click', () =>
-            { if (isGameOver) return; const currentText = zone.textContent; if (selectedWordElement) { if (currentText) returnWordToBank(currentText); const wordToPlace = selectedWordElement.dataset.word; zone.textContent = wordToPlace; selectedWordElement.classList.add('hidden');
-            selectedWordElement.classList.remove('selected'); selectedWordElement = null; } else if (currentText) { returnWordToBank(currentText); zone.textContent = ""; } }); }); function returnWordToBank(word) { const bankWords = document.querySelectorAll('.word');
-            bankWords.forEach(el => { if (el.dataset.word === word) el.classList.remove('hidden'); }); } async function checkAnswers() { if (isGameOver) return; isGameOver = true; clearInterval(timerInterval); btnCheck.textContent = "Menyimpan Skor...";
-            btnCheck.disabled = true; let correctCount = 0; const total = dropzones.length; const timeTaken = totalTime - timeRemaining; const minutesTaken = Math.floor(timeTaken / 60); const secondsTaken = timeTaken % 60; const timeString = `${minutesTaken}
-            menit ${secondsTaken} detik`; document.querySelectorAll('.word').forEach(el => el.classList.remove('selected')); selectedWordElement = null; dropzones.forEach(zone => { const answer = zone.textContent.trim(); const correctAnswer = zone.dataset.answer;
-            if (answer === correctAnswer) { zone.classList.add('correct'); correctCount++; } else { zone.classList.add('wrong'); } }); let scoreColor = correctCount === total ? "#2e7d32" : "#d32f2f"; scoreDisplay.innerHTML = `<span style="color:${scoreColor}">Skor: ${correctCount} dari ${total} benar.</span><br>
-            <span style="color:#424242; font-weight:normal;">Waktu pengerjaan: ${timeString}.</span>`; try { await addDoc(collection(db, "skor_sejarah"), { nama: currentPlayerName, skor_benar: correctCount, total_soal: total, waktu_pengerjaan: timeString,
-            detik_dihabiskan: timeTaken, tanggal: serverTimestamp() }); btnCheck.textContent = "Skor Berhasil Disimpan!"; btnCheck.style.backgroundColor = "#4CAF50"; } catch (e) { console.error("Error adding document: ", e); btnCheck.textContent = "Gagal
-            menyimpan skor (cek koneksi)"; btnCheck.style.backgroundColor = "#d32f2f"; } } btnCheck.addEventListener('click', checkAnswers);
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+        // Konfigurasi Firebase dari akunmu
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9_YkrVStYnx77UU8Jg3zqEj-n0hJJE3A",
+            authDomain: "gametugassejarahkelompok2.firebaseapp.com",
+            projectId: "gametugassejarahkelompok2",
+            storageBucket: "gametugassejarahkelompok2.firebasestorage.app",
+            messagingSenderId: "1044879828390",
+            appId: "1:1044879828390:web:cb934e9dd9d3eca842db67"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // LOGIKA GAME
+        const wordsList = [
+            "Johannes van den Bosch", "Seperlima", "Padi", "Gagal",
+            "Eduard Douwes Dekker", "Liberal", "Undang-Undang Agraria",
+            "Tanam Paksa", "Perang", "Komoditas Ekspor", "Nila",
+            "Cultuurprocenten", "Kelaparan", "Max Havelaar",
+            "H.W. Daendels", "Seperempat", "Politik Etis"
+        ];
+
+        const wordBank = document.getElementById('word-bank');
+        const dropzones = document.querySelectorAll('.dropzone');
+        const btnCheck = document.getElementById('btn-check');
+        const scoreDisplay = document.getElementById('score-display');
+        const timerDisplay = document.getElementById('timer');
+        
+        const loginScreen = document.getElementById('login-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const inputName = document.getElementById('player-name');
+        const btnStartGame = document.getElementById('btn-start-game');
+
+        let selectedWordElement = null;
+        const totalTime = 7 * 60; // 7 menit
+        let timeRemaining = totalTime;
+        let timerInterval;
+        let isGameOver = false;
+        let currentPlayerName = "";
+
+        // Event listener untuk tombol mulai game
+        btnStartGame.addEventListener('click', () => {
+            const nameValue = inputName.value.trim();
+            if (nameValue === "") {
+                alert("Harap masukkan nama kamu terlebih dahulu!");
+                return;
+            }
+            currentPlayerName = nameValue;
+            
+            loginScreen.style.display = 'none';
+            gameScreen.style.display = 'block';
+            document.body.style.display = 'block';
+            
+            initGame();
+        });
+
+        // Event listener agar bisa tekan Enter di keyboard
+        inputName.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                btnStartGame.click();
+            }
+        });
+
+        function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+        }
+
+        function initGame() {
+            isGameOver = false;
+            selectedWordElement = null;
+            timeRemaining = totalTime;
+            scoreDisplay.innerHTML = "";
+            btnCheck.disabled = false;
+            btnCheck.textContent = "Selesai & Kumpulkan";
+
+            wordBank.innerHTML = '';
+            shuffle(wordsList);
+            wordsList.forEach(word => {
+                const span = document.createElement('span');
+                span.classList.add('word');
+                span.textContent = word;
+                span.dataset.word = word;
+                span.addEventListener('click', () => selectWord(span));
+                wordBank.appendChild(span);
+            });
+
+            dropzones.forEach(zone => {
+                zone.textContent = "";
+                zone.classList.remove('correct', 'wrong');
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    checkAnswers();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent =
+                (minutes < 10 ? "0" : "") + minutes + ":" +
+                (seconds < 10 ? "0" : "") + seconds;
+        }
+
+        function selectWord(element) {
+            if (isGameOver) return;
+            document.querySelectorAll('.word').forEach(el => el.classList.remove('selected'));
+            if (selectedWordElement === element) {
+                selectedWordElement = null;
+            } else {
+                selectedWordElement = element;
+                element.classList.add('selected');
+            }
+        }
+
+        dropzones.forEach(zone => {
+            zone.addEventListener('click', () => {
+                if (isGameOver) return;
+                const currentText = zone.textContent;
+                if (selectedWordElement) {
+                    if (currentText) returnWordToBank(currentText);
+                    const wordToPlace = selectedWordElement.dataset.word;
+                    zone.textContent = wordToPlace;
+                    selectedWordElement.classList.add('hidden');
+                    selectedWordElement.classList.remove('selected');
+                    selectedWordElement = null;
+                } else if (currentText) {
+                    returnWordToBank(currentText);
+                    zone.textContent = "";
+                }
+            });
+        });
+
+        function returnWordToBank(word) {
+            const bankWords = document.querySelectorAll('.word');
+            bankWords.forEach(el => {
+                if (el.dataset.word === word) el.classList.remove('hidden');
+            });
+        }
+
+        async function checkAnswers() {
+            if (isGameOver) return;
+            isGameOver = true;
+            clearInterval(timerInterval);
+            
+            btnCheck.textContent = "Menyimpan Skor...";
+            btnCheck.disabled = true;
+
+            let correctCount = 0;
+            const total = dropzones.length;
+
+            const timeTaken = totalTime - timeRemaining;
+            const minutesTaken = Math.floor(timeTaken / 60);
+            const secondsTaken = timeTaken % 60;
+            const timeString = `${minutesTaken} menit ${secondsTaken} detik`;
+
+            document.querySelectorAll('.word').forEach(el => el.classList.remove('selected'));
+            selectedWordElement = null;
+
+            dropzones.forEach(zone => {
+                const answer = zone.textContent.trim();
+                const correctAnswer = zone.dataset.answer;
+                if (answer === correctAnswer) {
+                    zone.classList.add('correct');
+                    correctCount++;
+                } else {
+                    zone.classList.add('wrong');
+                }
+            });
+
+            let scoreColor = correctCount === total ? "#2e7d32" : "#d32f2f";
+            scoreDisplay.innerHTML = `<span style="color:${scoreColor}">Skor: ${correctCount} dari ${total} benar.</span><br>
+                                      <span style="color:#424242; font-weight:normal;">Waktu pengerjaan: ${timeString}.</span>`;
+
+            try {
+                await addDoc(collection(db, "skor_sejarah"), {
+                    nama: currentPlayerName,
+                    skor_benar: correctCount,
+                    total_soal: total,
+                    waktu_pengerjaan: timeString,
+                    detik_dihabiskan: timeTaken,
+                    tanggal: serverTimestamp()
+                });
+                btnCheck.textContent = "Skor Berhasil Disimpan!";
+                btnCheck.style.backgroundColor = "#4CAF50";
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                btnCheck.textContent = "Gagal menyimpan skor (cek koneksi)";
+                btnCheck.style.backgroundColor = "#d32f2f";
+            }
+        }
+
+        btnCheck.addEventListener('click', checkAnswers);
     </script>
 </body>
 
