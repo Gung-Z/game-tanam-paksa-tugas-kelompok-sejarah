@@ -12,15 +12,68 @@
             color: #333;
             line-height: 1.8;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
         }
         
-        .container {
+        #login-screen {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        #login-screen h2 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        
+        #login-screen input {
+            width: 90%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        
+        #login-screen input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        #btn-start-game {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: 0.3s;
+        }
+        
+        #btn-start-game:hover {
+            background-color: #388e3c;
+        }
+        
+        #game-screen {
+            display: none;
             max-width: 700px;
-            margin: 0 auto;
+            width: 100%;
             background-color: #fff;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
         
         h2 {
@@ -101,11 +154,6 @@
             padding: 0 10px;
         }
         
-        .dropzone.active {
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-        }
-        
         .dropzone.correct {
             background-color: #c8e6c9;
             border-color: #388e3c;
@@ -144,6 +192,7 @@
             background-color: white;
             color: #424242;
             border: 1px solid #ccc;
+            display: none;
         }
         
         #score-display {
@@ -165,7 +214,16 @@
 
 <body>
 
-    <div class="container">
+    <!-- HALAMAN LOGIN / MASUKKAN NAMA -->
+    <div id="login-screen">
+        <h2>Game Sejarah Cultuurstelsel</h2>
+        <p>Silakan masukkan nama kamu sebelum memulai permainan.</p>
+        <input type="text" id="player-name" placeholder="Ketik nama kamu di sini..." autocomplete="off">
+        <button id="btn-start-game">Mulai Game</button>
+    </div>
+
+    <!-- HALAMAN GAME -->
+    <div id="game-screen">
         <h2>Game Lengkapi Paragraf: Sejarah Cultuurstelsel</h2>
         <p class="instruction">
             <strong>Cara main:</strong> Klik/ketuk kata dari kotak di bawah, lalu klik/ketuk kotak kosong yang sesuai dalam paragraf. Waktu pengerjaan 7 menit. Jika waktu habis, jawaban akan diperiksa otomatis. Hati-hati, ada kata pengecoh!
@@ -173,9 +231,7 @@
 
         <div class="timer-container" id="timer">07:00</div>
 
-        <div class="word-bank" id="word-bank">
-            <!-- Kata-kata akan di-generate oleh JavaScript -->
-        </div>
+        <div class="word-bank" id="word-bank"></div>
 
         <div class="text-content">
             Sistem <span class="dropzone" data-answer="Tanam Paksa"></span> atau yang dikenal oleh pemerintah kolonial Belanda sebagai <i>Cultuurstelsel</i>, diperkenalkan secara resmi pada tahun 1830 oleh Gubernur Jenderal <span class="dropzone" data-answer="Johannes van den Bosch"></span>.
@@ -188,174 +244,39 @@
         </div>
 
         <div class="controls">
-            <button id="btn-check">Periksa jawaban</button>
+            <button id="btn-check">Selesai & Kumpulkan</button>
             <button id="btn-reset">Ulangi</button>
             <span id="score-display"></span>
         </div>
     </div>
 
-    <script>
-        const wordsList = [
-            "Johannes van den Bosch", "Seperlima", "Padi", "Gagal",
-            "Eduard Douwes Dekker", "Liberal", "Undang-Undang Agraria",
-            "Tanam Paksa", "Perang", "Komoditas Ekspor", "Nila",
-            "Cultuurprocenten", "Kelaparan", "Max Havelaar",
-            "H.W. Daendels", "Seperempat", "Politik Etis"
-        ];
-
-        const wordBank = document.getElementById('word-bank');
-        const dropzones = document.querySelectorAll('.dropzone');
-        const btnCheck = document.getElementById('btn-check');
-        const btnReset = document.getElementById('btn-reset');
-        const scoreDisplay = document.getElementById('score-display');
-        const timerDisplay = document.getElementById('timer');
-
-        let selectedWordElement = null;
-        const totalTime = 7 * 60; // 7 menit dalam detik
-        let timeRemaining = totalTime;
-        let timerInterval;
-        let isGameOver = false;
-
-        function shuffle(array) {
-            array.sort(() => Math.random() - 0.5);
-        }
-
-        function initGame() {
-            isGameOver = false;
-            selectedWordElement = null;
-            timeRemaining = totalTime;
-            scoreDisplay.innerHTML = "";
-            btnCheck.disabled = false;
-
-            wordBank.innerHTML = '';
-            shuffle(wordsList);
-            wordsList.forEach(word => {
-                const span = document.createElement('span');
-                span.classList.add('word');
-                span.textContent = word;
-                span.dataset.word = word;
-                span.addEventListener('click', () => selectWord(span));
-                wordBank.appendChild(span);
-            });
-
-            dropzones.forEach(zone => {
-                zone.textContent = "";
-                zone.classList.remove('correct', 'wrong');
-            });
-
-            startTimer();
-        }
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            updateTimerDisplay();
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                updateTimerDisplay();
-
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    checkAnswers();
-                }
-            }, 1000);
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            timerDisplay.textContent =
-                (minutes < 10 ? "0" : "") + minutes + ":" +
-                (seconds < 10 ? "0" : "") + seconds;
-        }
-
-        function selectWord(element) {
-            if (isGameOver) return;
-
-            document.querySelectorAll('.word').forEach(el => el.classList.remove('selected'));
-
-            if (selectedWordElement === element) {
-                selectedWordElement = null;
-            } else {
-                selectedWordElement = element;
-                element.classList.add('selected');
-            }
-        }
-
-        dropzones.forEach(zone => {
-            zone.addEventListener('click', () => {
-                if (isGameOver) return;
-
-                const currentText = zone.textContent;
-
-                if (selectedWordElement) {
-                    if (currentText) {
-                        returnWordToBank(currentText);
-                    }
-
-                    const wordToPlace = selectedWordElement.dataset.word;
-                    zone.textContent = wordToPlace;
-                    selectedWordElement.classList.add('hidden');
-                    selectedWordElement.classList.remove('selected');
-                    selectedWordElement = null;
-
-                } else if (currentText) {
-                    returnWordToBank(currentText);
-                    zone.textContent = "";
-                }
-            });
-        });
-
-        function returnWordToBank(word) {
-            const bankWords = document.querySelectorAll('.word');
-            bankWords.forEach(el => {
-                if (el.dataset.word === word) {
-                    el.classList.remove('hidden');
-                }
-            });
-        }
-
-        function checkAnswers() {
-            if (isGameOver) return;
-            isGameOver = true;
-            clearInterval(timerInterval);
-            btnCheck.disabled = true;
-
-            let correctCount = 0;
-            const total = dropzones.length;
-
-            // Hitung waktu yang dihabiskan
-            const timeTaken = totalTime - timeRemaining;
-            const minutesTaken = Math.floor(timeTaken / 60);
-            const secondsTaken = timeTaken % 60;
-
-            document.querySelectorAll('.word').forEach(el => el.classList.remove('selected'));
-            selectedWordElement = null;
-
-            dropzones.forEach(zone => {
-                const answer = zone.textContent.trim();
-                const correctAnswer = zone.dataset.answer;
-
-                if (answer === correctAnswer) {
-                    zone.classList.add('correct');
-                    correctCount++;
-                } else {
-                    zone.classList.add('wrong');
-                }
-            });
-
-            // Tampilkan Skor dan Waktu
-            let scoreColor = correctCount === total ? "#2e7d32" : "#d32f2f";
-
-            scoreDisplay.innerHTML = `<span style="color:${scoreColor}">Skor: ${correctCount} dari ${total} benar.</span><br>
-                                  <span style="color:#424242; font-weight:normal;">Waktu pengerjaan: ${minutesTaken} menit ${secondsTaken} detik.</span>`;
-        }
-
-        btnCheck.addEventListener('click', checkAnswers);
-        btnReset.addEventListener('click', initGame);
-
-        initGame();
+    <!-- SCRIPT UNTUK FIREBASE (Gunakan tipe module) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"; import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"; // Konfigurasi Firebase dari
+        akunmu const firebaseConfig = { apiKey: "AIzaSyB9_YkrVStYnx77UU8Jg3zqEj-n0hJJE3A", authDomain: "gametugassejarahkelompok2.firebaseapp.com", projectId: "gametugassejarahkelompok2", storageBucket: "gametugassejarahkelompok2.firebasestorage.app",
+        messagingSenderId: "1044879828390", appId: "1:1044879828390:web:cb934e9dd9d3eca842db67" }; const app = initializeApp(firebaseConfig); const db = getFirestore(app); // LOGIKA GAME const wordsList = [ "Johannes van den Bosch", "Seperlima", "Padi",
+        "Gagal", "Eduard Douwes Dekker", "Liberal", "Undang-Undang Agraria", "Tanam Paksa", "Perang", "Komoditas Ekspor", "Nila", "Cultuurprocenten", "Kelaparan", "Max Havelaar", "H.W. Daendels", "Seperempat", "Politik Etis" ]; const wordBank = document.getElementById('word-bank');
+        const dropzones = document.querySelectorAll('.dropzone'); const btnCheck = document.getElementById('btn-check'); const scoreDisplay = document.getElementById('score-display'); const timerDisplay = document.getElementById('timer'); const loginScreen
+        = document.getElementById('login-screen'); const gameScreen = document.getElementById('game-screen'); const inputName = document.getElementById('player-name'); const btnStartGame = document.getElementById('btn-start-game'); let selectedWordElement
+        = null; const totalTime = 7 * 60; // 7 menit let timeRemaining = totalTime; let timerInterval; let isGameOver = false; let currentPlayerName = ""; btnStartGame.addEventListener('click', () => { const nameValue = inputName.value.trim(); if (nameValue
+        === "") { alert("Harap masukkan nama kamu terlebih dahulu!"); return; } currentPlayerName = nameValue; loginScreen.style.display = 'none'; gameScreen.style.display = 'block'; document.body.style.display = 'block'; initGame(); }); inputName.addEventListener('keypress',
+        function (e) { if (e.key === 'Enter') { btnStartGame.click(); } }); function shuffle(array) { array.sort(() => Math.random() - 0.5); } function initGame() { isGameOver = false; selectedWordElement = null; timeRemaining = totalTime; scoreDisplay.innerHTML
+        = ""; btnCheck.disabled = false; btnCheck.textContent = "Selesai & Kumpulkan"; wordBank.innerHTML = ''; shuffle(wordsList); wordsList.forEach(word => { const span = document.createElement('span'); span.classList.add('word'); span.textContent =
+        word; span.dataset.word = word; span.addEventListener('click', () => selectWord(span)); wordBank.appendChild(span); }); dropzones.forEach(zone => { zone.textContent = ""; zone.classList.remove('correct', 'wrong'); }); startTimer(); } function
+        startTimer() { clearInterval(timerInterval); updateTimerDisplay(); timerInterval = setInterval(() => { timeRemaining--; updateTimerDisplay(); if (timeRemaining
+        <=0 ) { clearInterval(timerInterval); checkAnswers(); } }, 1000); } function
+            updateTimerDisplay() { const minutes=M ath.floor(timeRemaining / 60); const seconds=t imeRemaining % 60; timerDisplay.textContent=( minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds; } function selectWord(element)
+            { if (isGameOver) return; document.querySelectorAll( '.word').forEach(el=> el.classList.remove('selected')); if (selectedWordElement === element) { selectedWordElement = null; } else { selectedWordElement = element; element.classList.add('selected'); } } dropzones.forEach(zone => { zone.addEventListener('click', () =>
+            { if (isGameOver) return; const currentText = zone.textContent; if (selectedWordElement) { if (currentText) returnWordToBank(currentText); const wordToPlace = selectedWordElement.dataset.word; zone.textContent = wordToPlace; selectedWordElement.classList.add('hidden');
+            selectedWordElement.classList.remove('selected'); selectedWordElement = null; } else if (currentText) { returnWordToBank(currentText); zone.textContent = ""; } }); }); function returnWordToBank(word) { const bankWords = document.querySelectorAll('.word');
+            bankWords.forEach(el => { if (el.dataset.word === word) el.classList.remove('hidden'); }); } async function checkAnswers() { if (isGameOver) return; isGameOver = true; clearInterval(timerInterval); btnCheck.textContent = "Menyimpan Skor...";
+            btnCheck.disabled = true; let correctCount = 0; const total = dropzones.length; const timeTaken = totalTime - timeRemaining; const minutesTaken = Math.floor(timeTaken / 60); const secondsTaken = timeTaken % 60; const timeString = `${minutesTaken}
+            menit ${secondsTaken} detik`; document.querySelectorAll('.word').forEach(el => el.classList.remove('selected')); selectedWordElement = null; dropzones.forEach(zone => { const answer = zone.textContent.trim(); const correctAnswer = zone.dataset.answer;
+            if (answer === correctAnswer) { zone.classList.add('correct'); correctCount++; } else { zone.classList.add('wrong'); } }); let scoreColor = correctCount === total ? "#2e7d32" : "#d32f2f"; scoreDisplay.innerHTML = `<span style="color:${scoreColor}">Skor: ${correctCount} dari ${total} benar.</span><br>
+            <span style="color:#424242; font-weight:normal;">Waktu pengerjaan: ${timeString}.</span>`; try { await addDoc(collection(db, "skor_sejarah"), { nama: currentPlayerName, skor_benar: correctCount, total_soal: total, waktu_pengerjaan: timeString,
+            detik_dihabiskan: timeTaken, tanggal: serverTimestamp() }); btnCheck.textContent = "Skor Berhasil Disimpan!"; btnCheck.style.backgroundColor = "#4CAF50"; } catch (e) { console.error("Error adding document: ", e); btnCheck.textContent = "Gagal
+            menyimpan skor (cek koneksi)"; btnCheck.style.backgroundColor = "#d32f2f"; } } btnCheck.addEventListener('click', checkAnswers);
     </script>
-
 </body>
 
 </html>
